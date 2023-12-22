@@ -2,19 +2,31 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import Context from "./assets/Components/Context";
-import InputForm from "./assets/Components/InputForm";
+import { useContext } from "react";
+import { Context } from "./assets/Components/Condext";
 import List from "./assets/Components/List";
+import InputForm from "./assets/Components/InputForm";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [list, setList] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [list, setList] = useState([]);
+  const [editMode, setEditMode] = useState(false);
+  const [editList, setEditList] = useState("");
 
   return (
     <>
-      {/* <Context.Provider value={(text, setText)}> */}
-      <Context.Provider value={{ inputValue, setInputValue, list, setList }}>
+      <Context.Provider
+        value={{
+          inputValue,
+          setInputValue,
+          list,
+          setList,
+          editMode,
+          setEditMode,
+          editList,
+          setEditList,
+        }}
+      >
         <InputForm></InputForm>
         <List></List>
       </Context.Provider>

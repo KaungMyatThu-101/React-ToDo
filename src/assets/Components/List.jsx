@@ -1,24 +1,27 @@
-import React from "react";
-import { useContext } from "react";
-import Context from "./Context";
+import React, { useContext } from "react";
+import { Context } from "./Condext";
+
+import Action from "./Action";
 
 const List = () => {
-  const { list } = useContext(Context);
+  const { list, setList } = useContext(Context);
+
+  // console.log(list);
 
   return (
     <>
-      <ul>
-        {/* 1 */}
-
-        {/* {list.map((list) => {
-          return <li key={list.id}>{list.item}</li>;
-        })} */}
-
-        {/* 2 */}
-        {list.map((item, index) => (
-          <li key={item + index}>{item}</li> // Use a combination of item and index
-        ))}
-      </ul>
+      {list.length !== 0 ? (
+        <ul>
+          {list.map((d) => (
+            <li key={d.id}>
+              {d.item}
+              <Action id={d.id} item={d.item} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Please fill data</p>
+      )}
     </>
   );
 };

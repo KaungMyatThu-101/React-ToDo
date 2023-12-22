@@ -1,29 +1,46 @@
 import React, { useState } from "react";
 import { useContext } from "react";
-import Context from "./Context"; //to use data from parent
+import { Context } from "./Condext";
 
 const InputForm = () => {
-  const { inputValue, setInputValue, list, setList } = useContext(Context); //to use data from parent
+  const {
+    inputValue,
+    setInputValue,
+    list,
+    setList,
+    editMode,
+    setEditMode,
+    editList,
+    setEditList,
+  } = useContext(Context);
 
-  function submitHandler(e) {
+  const submitHandler = (e) => {
     e.preventDefault();
-    setList([...list, inputValue]);
-    // setList([...list, { id: Math.random().toString(), item: inputValue }]);
-  }
-  const inputControl = (e) => {
+    setList([...list, { id: Math.random().toString(), item: inputValue }]);
+    setInputValue("");
+    setEditMode(false); // Reset edit mode after submission
+  };
+
+  const updateHandler = (e) => {
+    e.preventDefault();
+    setList(
+      list.map((item) =>
+        item.id === editList ? { ...item, item: inputValue } : item
+      )
+    );
+    setInputValue("");
+    setEditMode(false); // Reset edit mode after update
+  };
+
+  const inputhandler = (e) => {
     setInputValue(e.target.value);
   };
 
   return (
     <>
-      <form action="submit" onSubmit={submitHandler}>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={inputControl}
-          className="formInput"
-        />
-        <button type="submit">Add</button>
+      <form onSubmit={editMode ? updateHandler : submitHandler}>
+        <input value={inputValue} onChange={inputhandler} />
+        <button type="submit">{editMode ? "Update" : "Submit"}</button>
       </form>
     </>
   );

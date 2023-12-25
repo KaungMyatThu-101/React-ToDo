@@ -12,6 +12,7 @@ function App() {
   const [list, setList] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [editList, setEditList] = useState("");
+  const [toggle, setToggle] = useState("false");
 
   return (
     <>
@@ -25,6 +26,8 @@ function App() {
           setEditMode,
           editList,
           setEditList,
+          toggle,
+          setToggle,
         }}
       >
         <InputForm></InputForm>

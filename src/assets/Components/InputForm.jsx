@@ -16,7 +16,10 @@ const InputForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setList([...list, { id: Math.random().toString(), item: inputValue }]);
+    setList([
+      ...list,
+      { id: Math.random().toString(), item: inputValue, isToggled: false },
+    ]);
     setInputValue("");
     setEditMode(false); // Reset edit mode after submission
   };
